@@ -1,0 +1,3199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NURA - Tu bienestar comienza aquí</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7f6;
+            color: #263238;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .app {
+            min-height: 100vh;
+        }
+
+        /* =========================
+           PORTADA
+        ========================= */
+
+        .portada {
+            min-height: 100vh;
+            background-image: url("./nura-portada.png");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .portada-card {
+            width: 100%;
+            max-width: 520px;
+            background: rgba(255,255,255,0.96);
+            border-radius: 28px;
+            padding: 32px 28px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.18);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: 5px;
+            color: #1b8f72;
+            margin-bottom: 8px;
+        }
+
+        .portada-card h1 {
+            font-size: 26px;
+            margin-bottom: 12px;
+        }
+
+        .portada-card p {
+            line-height: 1.6;
+            color: #607d7a;
+            margin-bottom: 24px;
+        }
+
+        .btn-principal {
+            width: 100%;
+            border: none;
+            padding: 16px;
+            border-radius: 16px;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #1b8f72, #55b78e);
+            box-shadow: 0 8px 18px rgba(27,143,114,0.25);
+        }
+
+        .btn-principal:hover {
+            transform: translateY(-1px);
+        }
+
+        .mini-text {
+            margin-top: 16px;
+            font-size: 13px;
+            color: #78909c;
+        }
+
+        /* =========================
+           CONTENEDORES
+        ========================= */
+
+        .pantalla {
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .cabecera {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .cabecera .logo {
+            font-size: 32px;
+        }
+
+        .cabecera h2 {
+            margin-bottom: 8px;
+        }
+
+        .cabecera p {
+            color: #78909c;
+        }
+
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+        }
+
+        /* =========================
+           FORMULARIO
+        ========================= */
+
+        .paso {
+            display: none;
+        }
+
+        .paso.activo {
+            display: block;
+        }
+
+        .paso h3 {
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .paso p {
+            color: #78909c;
+            margin-bottom: 22px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e7e5;
+            border-radius: 14px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #1b8f72;
+        }
+
+        .opciones {
+            display: grid;
+            gap: 12px;
+        }
+
+        .opcion {
+            border: 2px solid #e0e7e5;
+            border-radius: 15px;
+            padding: 16px;
+            background: white;
+            transition: 0.2s;
+        }
+
+        .opcion:hover {
+            border-color: #8bcbb8;
+        }
+
+        .opcion.seleccionada {
+            border-color: #1b8f72;
+            background: #eaf7f2;
+        }
+
+        .opcion input {
+            display: none;
+        }
+
+        .opcion strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .opcion small {
+            color: #78909c;
+        }
+
+        .alimentos-encabezado {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin: 18px 0 12px;
+        }
+
+        .btn-mini {
+            border: none;
+            background: #eaf7f2;
+            color: #16745d;
+            padding: 8px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .alimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 9px;
+        }
+
+        .alimento-btn {
+            border: 2px solid #e0e7e5;
+            background: white;
+            color: #455a64;
+            padding: 12px 9px;
+            border-radius: 13px;
+            font-size: 13px;
+            min-height: 48px;
+        }
+
+        .alimento-btn.seleccionado {
+            border-color: #1b8f72;
+            background: #eaf7f2;
+            color: #16745d;
+            font-weight: bold;
+        }
+
+        .alimento-btn.evitado {
+            border-color: #d58b8b;
+            background: #fff2f2;
+            color: #a94444;
+            font-weight: bold;
+        }
+
+        .contador-alimentos {
+            margin-top: 12px;
+            color: #1b8f72;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .alimentos-evitar {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e9e6;
+        }
+
+        .alimentos-evitar > strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .alimentos-evitar > small {
+            display: block;
+            color: #78909c;
+            margin-bottom: 12px;
+        }
+
+        .dias-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .dia-btn {
+            border: 2px solid #e0e7e5;
+            background: white;
+            padding: 15px 10px;
+            border-radius: 14px;
+            font-weight: bold;
+            color: #455a64;
+        }
+
+        .dia-btn.seleccionado {
+            background: #eaf7f2;
+            border-color: #1b8f72;
+            color: #16745d;
+        }
+
+        .contador-dias {
+            margin-top: 15px;
+            text-align: center;
+            color: #1b8f72;
+            font-weight: bold;
+        }
+
+        .navegacion {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn-secundario,
+        .btn-siguiente {
+            flex: 1;
+            padding: 15px;
+            border-radius: 14px;
+            border: none;
+            font-weight: bold;
+        }
+
+        .btn-secundario {
+            background: #eceff1;
+            color: #455a64;
+        }
+
+        .btn-siguiente {
+            background: #1b8f72;
+            color: white;
+        }
+
+        .progreso {
+            height: 7px;
+            background: #e8eeee;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .progreso-barra {
+            height: 100%;
+            background: linear-gradient(90deg, #1b8f72, #55b78e);
+            width: 10%;
+            transition: 0.3s;
+        }
+
+        /* =========================
+           PLAN SEMANAL
+        ========================= */
+
+        .bienvenida {
+            background: linear-gradient(135deg, #1b8f72, #55b78e);
+            color: white;
+            border-radius: 22px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .bienvenida h2 {
+            margin-bottom: 8px;
+        }
+
+        .semana {
+            display: grid;
+            gap: 20px;
+        }
+
+        .dia-card {
+            background: white;
+            border-radius: 22px;
+            padding: 22px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+        }
+
+        .dia-titulo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .dia-titulo h3 {
+            font-size: 21px;
+        }
+
+        .badge {
+            background: #eaf7f2;
+            color: #16745d;
+            padding: 7px 11px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .badge-descanso {
+            background: #edf5ef;
+            color: #4d7758;
+        }
+
+        .comida {
+            border: 1px solid #e6ecea;
+            border-radius: 17px;
+            padding: 17px;
+            margin-bottom: 12px;
+        }
+
+        .comida:last-child {
+            margin-bottom: 0;
+        }
+
+        .comida-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .comida-header strong {
+            font-size: 15px;
+        }
+
+        .btn-cambiar {
+            border: none;
+            background: #edf7f4;
+            color: #16745d;
+            padding: 7px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .comida-texto {
+            color: #455a64;
+            line-height: 1.5;
+        }
+
+        .entrenamiento {
+            margin-top: 18px;
+            padding: 18px;
+            border-radius: 17px;
+            background: #f1faf7;
+            border-left: 5px solid #1b8f72;
+        }
+
+        .entrenamiento h4 {
+            margin-bottom: 12px;
+            color: #16745d;
+        }
+
+        .ejercicio {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 9px 0;
+            border-bottom: 1px solid #dcebe5;
+            font-size: 14px;
+        }
+
+        .ejercicio:last-child {
+            border-bottom: none;
+        }
+
+        .descanso {
+            margin-top: 18px;
+            padding: 18px;
+            border-radius: 17px;
+            background: #f2f8f3;
+            color: #48644e;
+            line-height: 1.5;
+        }
+
+        .boton-entrenar {
+            width: 100%;
+            margin-top: 15px;
+            border: none;
+            background: #1b8f72;
+            color: white;
+            padding: 14px;
+            border-radius: 13px;
+            font-weight: bold;
+        }
+
+        .hablar {
+            position: sticky;
+            bottom: 15px;
+            width: 100%;
+            border: none;
+            padding: 16px;
+            border-radius: 17px;
+            background: #263238;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            margin-top: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* =========================
+           ENTRENAMIENTO
+        ========================= */
+
+        .entrenamiento-pantalla {
+            text-align: center;
+        }
+
+        .ejercicio-numero {
+            color: #1b8f72;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .ejercicio-grande {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .series-info {
+            color: #78909c;
+            margin-bottom: 25px;
+        }
+
+        .timer {
+            font-size: 65px;
+            font-weight: bold;
+            color: #1b8f72;
+            margin: 25px 0;
+        }
+
+        .motivacion {
+            background: #eaf7f2;
+            color: #16745d;
+            border-radius: 17px;
+            padding: 18px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .controles {
+            display: grid;
+            gap: 10px;
+        }
+
+        .bloque-entrenamiento { margin-top: 18px; padding: 16px; border-radius: 17px; background: #f8fbfa; border: 1px solid #e2ece8; }
+        .bloque-entrenamiento h5 { color: #16745d; margin-bottom: 10px; font-size: 14px; }
+        .mini-ejercicio { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid #e6eeeb; font-size: 13px; }
+        .mini-ejercicio:last-child { border-bottom: none; }
+        .cardio-box { margin-top: 14px; padding: 14px; border-radius: 15px; background: #f1f7ff; color: #40556a; }
+        .calma-box { margin-top: 12px; padding: 14px; border-radius: 15px; background: #f2f8f3; color: #48644e; }
+        .sesion-badge { display: inline-block; margin-top: 5px; color: #16745d; font-size: 12px; font-weight: bold; }
+        .preparacion-texto {
+            color: #607d7a;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .maquinas-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .maquina-btn {
+            border: 2px solid #e0e7e5;
+            background: white;
+            color: #455a64;
+            padding: 11px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .maquina-btn:hover,
+        .maquina-btn.seleccionada {
+            border-color: #1b8f72;
+            background: #eaf7f2;
+            color: #16745d;
+        }
+
+        .preparacion-seleccion {
+            margin-top: 10px;
+            color: #607d7a;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .preparacion-resumen {
+            margin-bottom: 18px;
+            padding: 14px;
+            border-radius: 15px;
+            background: #f1f7ff;
+            color: #40556a;
+            line-height: 1.5;
+        }
+
+        .serie-indicador {
+            display: inline-block;
+            background: #eaf7f2;
+            color: #16745d;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .objetivo-serie {
+            color: #607d7a;
+            font-size: 15px;
+            margin-bottom: 18px;
+        }
+
+        .descanso-panel {
+            background: #f1f7ff;
+            border-radius: 17px;
+            padding: 18px;
+            margin: 18px 0;
+        }
+
+        .descanso-panel h3 {
+            color: #40556a;
+            margin-bottom: 8px;
+        }
+
+        .descanso-panel p {
+            color: #607d7a;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .boton-completado {
+            background: #1b8f72;
+            color: white;
+        }
+
+        .resumen-sesion {
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:10px;
+            margin:20px 0;
+        }
+
+        .resumen-sesion div {
+            background:#f5f8f7;
+            border-radius:15px;
+            padding:14px 10px;
+            text-align:center;
+        }
+
+        .resumen-sesion strong {
+            display:block;
+            color:#16745d;
+            font-size:20px;
+            margin-bottom:4px;
+        }
+
+        .resumen-sesion span {
+            color:#607d7a;
+            font-size:12px;
+        }
+
+        .historial-box {
+            background:#f7faf9;
+            border-radius:18px;
+            padding:16px;
+            margin-top:18px;
+            text-align:left;
+        }
+
+        .historial-item {
+            background:white;
+            border:1px solid #e6eeeb;
+            border-radius:14px;
+            padding:12px 14px;
+            margin-top:10px;
+        }
+
+        .historial-item strong {
+            color:#16745d;
+        }
+
+        .historial-meta {
+            color:#607d7a;
+            font-size:12px;
+            margin-top:5px;
+            line-height:1.5;
+        }
+
+        .progreso-grid {
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:10px;
+            margin:18px 0;
+        }
+
+        .progreso-card {
+            background:#f5f8f7;
+            border-radius:15px;
+            padding:14px 10px;
+            text-align:center;
+        }
+
+        .progreso-card strong {
+            display:block;
+            color:#16745d;
+            font-size:22px;
+            margin-bottom:4px;
+        }
+
+        .progreso-card span {
+            color:#607d7a;
+            font-size:11px;
+        }
+
+        .progreso-mensaje {
+            background:#eef8f4;
+            border-radius:15px;
+            padding:14px 16px;
+            color:#315d50;
+            line-height:1.6;
+            margin-bottom:18px;
+        }
+
+        @media (max-width:650px) {
+            .progreso-grid {
+                grid-template-columns:1fr;
+            }
+        }
+
+        .enfriamiento-lista {
+            text-align:left;
+            background:#f2f8f3;
+            border-radius:15px;
+            padding:14px 18px;
+            color:#48644e;
+            line-height:1.8;
+            margin:18px 0;
+        }
+
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+
+        @media (max-width: 649px) {
+            .portada {
+                min-height: 100svh;
+                padding: 18px 14px;
+                align-items: flex-end;
+                background-position: center top;
+            }
+
+            .portada-card {
+                border-radius: 24px;
+                padding: 26px 20px;
+            }
+
+            .logo {
+                font-size: 36px;
+            }
+
+            .portada-card h1 {
+                font-size: 23px;
+            }
+
+            .pantalla {
+                padding: 18px 12px;
+            }
+
+            .card, .dia-card {
+                padding: 18px;
+                border-radius: 18px;
+            }
+
+            .comida-header, .dia-titulo {
+                align-items: flex-start;
+            }
+
+            .comida-header {
+                flex-wrap: wrap;
+            }
+
+            .mini-ejercicio {
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .maquina-btn {
+                min-height: 46px;
+                font-size: 12px;
+            }
+
+            .mini-ejercicio strong {
+                color: #607d7a;
+            }
+
+            .ejercicio-grande {
+                font-size: 25px;
+            }
+
+            .timer {
+                font-size: 56px;
+            }
+
+            .navegacion {
+                position: sticky;
+                bottom: 8px;
+                background: rgba(255,255,255,0.96);
+                padding-top: 8px;
+            }
+        }
+
+        @media (min-width: 650px) {
+            .alimentos-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .dias-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .portada {
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="app" class="app"></div>
+
+<script>
+
+    /* =====================================================
+       DATOS DE NURA
+    ===================================================== */
+
+    let datosNura = {
+        nombre: "",
+        voz: "",
+        sexo: "",
+        edad: "",
+        peso: "",
+        altura: "",
+        actividad: "",
+        experiencia: "",
+        objetivo: "",
+        alimentacion: "",
+        alimentosIncluidos: [],
+        alimentosEvitar: [],
+        dias: [],
+        preparacionMaquina: {}
+    };
+
+    let pasoActual = 1;
+
+    const diasSemana = [
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes",
+        "Sábado",
+        "Domingo"
+    ];
+
+    /* =====================================================
+       ALIMENTOS Y MENÚS
+       NURA usa las preferencias del usuario para construir
+       una semana variada y evitar alimentos excluidos.
+    ===================================================== */
+
+    const alimentosDisponibles = [
+        ["pollo", "🐔 Pollo", "Proteína"],
+        ["carne", "🥩 Carne", "Proteína"],
+        ["pescado", "🐟 Pescado", "Proteína"],
+        ["atun", "🐠 Atún", "Proteína"],
+        ["salmon", "🍣 Salmón", "Proteína"],
+        ["huevo", "🥚 Huevo", "Proteína"],
+        ["queso", "🧀 Queso", "Proteína"],
+        ["leche", "🥛 Leche", "Lácteos"],
+        ["frijoles", "🫘 Frijoles", "Leguminosas"],
+        ["lentejas", "🫘 Lentejas", "Leguminosas"],
+        ["arroz", "🍚 Arroz", "Cereales"],
+        ["avena", "🌾 Avena", "Cereales"],
+        ["tortilla", "🌽 Tortilla", "Cereales"],
+        ["pan", "🍞 Pan", "Cereales"],
+        ["pasta", "🍝 Pasta", "Cereales"],
+        ["papa", "🥔 Papa", "Tubérculos"],
+        ["verduras", "🥦 Verduras", "Vegetales"],
+        ["frutas", "🍎 Frutas", "Frutas"],
+        ["aguacate", "🥑 Aguacate", "Grasas"],
+        ["nueces", "🥜 Nueces y semillas", "Grasas"],
+        ["yogur", "🥣 Yogur", "Lácteos"]
+    ];
+
+    const menuDesayuno = [
+        {texto:"Huevos con verduras y tortillas.", tags:["huevo","verduras","tortilla"]},
+        {texto:"Huevos con aguacate y tortillas.", tags:["huevo","aguacate","tortilla"]},
+        {texto:"Avena con leche, fruta y nueces.", tags:["avena","leche","frutas","nueces"]},
+        {texto:"Avena con yogur y fruta.", tags:["avena","yogur","frutas"]},
+        {texto:"Quesadillas de queso con verduras.", tags:["queso","tortilla","verduras"]},
+        {texto:"Quesadillas de queso con aguacate y fruta.", tags:["queso","tortilla","aguacate","frutas"]},
+        {texto:"Sándwich de pollo con verduras y fruta.", tags:["pollo","pan","verduras","frutas"]},
+        {texto:"Sándwich de atún con verduras.", tags:["atun","pan","verduras"]},
+        {texto:"Tostadas de frijoles con queso y aguacate.", tags:["frijoles","tortilla","queso","aguacate"]},
+        {texto:"Tostadas de lentejas con verduras y aguacate.", tags:["lentejas","tortilla","verduras","aguacate"]}
+    ];
+
+    const menuComida = [
+        {texto:"Pollo con arroz y verduras.", tags:["pollo","arroz","verduras"]},
+        {texto:"Pollo con papa, verduras y aguacate.", tags:["pollo","papa","verduras","aguacate"]},
+        {texto:"Carne con arroz, verduras y aguacate.", tags:["carne","arroz","verduras","aguacate"]},
+        {texto:"Carne con papa y verduras.", tags:["carne","papa","verduras"]},
+        {texto:"Pescado con arroz y verduras.", tags:["pescado","arroz","verduras"]},
+        {texto:"Salmón con papa y verduras.", tags:["salmon","papa","verduras"]},
+        {texto:"Atún con pasta y verduras.", tags:["atun","pasta","verduras"]},
+        {texto:"Lentejas con arroz y verduras.", tags:["lentejas","arroz","verduras"]},
+        {texto:"Frijoles con arroz, verduras y aguacate.", tags:["frijoles","arroz","verduras","aguacate"]},
+        {texto:"Pollo con pasta y verduras.", tags:["pollo","pasta","verduras"]}
+    ];
+
+    const menuCena = [
+        {texto:"Tostadas de pollo con verduras y aguacate.", tags:["pollo","tortilla","verduras","aguacate"]},
+        {texto:"Quesadillas de queso con verduras.", tags:["queso","tortilla","verduras"]},
+        {texto:"Huevos con verduras y tortillas.", tags:["huevo","verduras","tortilla"]},
+        {texto:"Sándwich de atún con verduras.", tags:["atun","pan","verduras"]},
+        {texto:"Tostadas de atún con aguacate y verduras.", tags:["atun","tortilla","aguacate","verduras"]},
+        {texto:"Tacos de carne con verduras y aguacate.", tags:["carne","tortilla","verduras","aguacate"]},
+        {texto:"Tacos de pollo con verduras.", tags:["pollo","tortilla","verduras"]},
+        {texto:"Lentejas con verduras y tortillas.", tags:["lentejas","verduras","tortilla"]},
+        {texto:"Frijoles con queso, verduras y tortillas.", tags:["frijoles","queso","verduras","tortilla"]},
+        {texto:"Papa con huevo y verduras.", tags:["papa","huevo","verduras"]}
+    ];
+
+    const maquinasPreparacion = [
+        ["caminadora", "🚶 Caminadora"],
+        ["escalera", "🪜 Escalera"],
+        ["eliptica", "🏃 Elíptica"],
+        ["bicicleta", "🚴 Bicicleta"]
+    ];
+
+    /* =====================================================
+       RUTINAS POR SESIÓN
+       NURA organiza cada entrenamiento como:
+       calentamiento → trabajo principal → cardio → vuelta a la calma
+    ===================================================== */
+
+    const rutinasPorSesion = {
+
+        principiante: {
+            A: {
+                nombre: "Tren superior",
+                calentamiento: [["Marcha suave en el sitio", "5 minutos"], ["Movilidad de hombros y brazos", "5 minutos"], ["Movilidad suave de cuello y espalda", "5 minutos"]],
+                ejercicios: [["Flexiones apoyadas", "2 series × 8-12"], ["Remo con banda o mochila", "2 series × 8-12"], ["Press de hombros con botellas", "2 series × 8-12"], ["Curl de bíceps con botellas", "2 series × 10-12"]],
+                cardio: ["Caminata a ritmo cómodo", "10 minutos"],
+                calma: ["Respiración tranquila y movilidad suave", "3-5 minutos"]
+            },
+            B: {
+                nombre: "Pierna + glúteo",
+                calentamiento: [["Marcha suave en el sitio", "5 minutos"], ["Movilidad de cadera y tobillos", "5 minutos"], ["Sentadillas muy suaves", "5 minutos"]],
+                ejercicios: [["Sentadilla a peso corporal", "2 series × 8-12"], ["Puente de glúteos", "2 series × 10-15"], ["Desplante asistido", "2 series × 8-10 por lado"], ["Elevación de talones", "2 series × 10-15"]],
+                cardio: ["Caminata a ritmo cómodo", "10 minutos"],
+                calma: ["Respiración tranquila y movilidad suave", "3-5 minutos"]
+            },
+            C: {
+                nombre: "Tren superior + core",
+                calentamiento: [["Marcha suave en el sitio", "5 minutos"], ["Movilidad de hombros y brazos", "5 minutos"], ["Movilidad suave de columna", "5 minutos"]],
+                ejercicios: [["Flexiones apoyadas", "2 series × 8-12"], ["Remo con banda o mochila", "2 series × 8-12"], ["Press de hombros con botellas", "2 series × 8-12"], ["Plancha apoyada", "2 series × 15-25 segundos"]],
+                cardio: ["Caminata a ritmo cómodo", "10 minutos"],
+                calma: ["Respiración tranquila y movilidad suave", "3-5 minutos"]
+            },
+            D: {
+                nombre: "Pierna + glúteo",
+                calentamiento: [["Marcha suave en el sitio", "5 minutos"], ["Movilidad de cadera y tobillos", "5 minutos"], ["Sentadillas muy suaves", "5 minutos"]],
+                ejercicios: [["Sentadilla a peso corporal", "2 series × 8-12"], ["Puente de glúteos", "2 series × 10-15"], ["Paso atrás asistido", "2 series × 8-10 por lado"], ["Elevación de talones", "2 series × 10-15"]],
+                cardio: ["Caminata a ritmo cómodo", "10 minutos"],
+                calma: ["Respiración tranquila y movilidad suave", "3-5 minutos"]
+            }
+        },
+
+        intermedio: {
+            A: {
+                nombre: "Tren superior",
+                calentamiento: [["Marcha activa en el sitio", "5 minutos"], ["Movilidad de hombros y brazos", "5 minutos"], ["Activación suave de espalda", "5 minutos"]],
+                ejercicios: [["Flexiones", "3 series × 8-12"], ["Remo con banda o mochila", "3 series × 8-12"], ["Press de hombros", "3 series × 8-12"], ["Curl de bíceps", "3 series × 10-12"]],
+                cardio: ["Caminata rápida o bicicleta suave", "12-15 minutos"],
+                calma: ["Respiración y movilidad suave", "5 minutos"]
+            },
+            B: {
+                nombre: "Pierna + glúteo",
+                calentamiento: [["Marcha activa", "5 minutos"], ["Movilidad de cadera y tobillos", "5 minutos"], ["Sentadillas suaves", "5 minutos"]],
+                ejercicios: [["Sentadilla", "3 series × 8-12"], ["Puente de glúteos", "3 series × 12-15"], ["Desplante", "3 series × 8-10 por lado"], ["Elevación de talones", "3 series × 12-15"]],
+                cardio: ["Caminata rápida o bicicleta suave", "12-15 minutos"],
+                calma: ["Respiración y movilidad suave", "5 minutos"]
+            },
+            C: {
+                nombre: "Tren superior + core",
+                calentamiento: [["Marcha activa", "5 minutos"], ["Movilidad de hombros y brazos", "5 minutos"], ["Activación de core suave", "5 minutos"]],
+                ejercicios: [["Flexiones", "3 series × 8-12"], ["Remo", "3 series × 8-12"], ["Press de hombros", "3 series × 8-12"], ["Plancha", "3 series × 20-30 segundos"]],
+                cardio: ["Caminata rápida o bicicleta suave", "12-15 minutos"],
+                calma: ["Respiración y movilidad suave", "5 minutos"]
+            },
+            D: {
+                nombre: "Pierna + glúteo",
+                calentamiento: [["Marcha activa", "5 minutos"], ["Movilidad de cadera y tobillos", "5 minutos"], ["Sentadillas suaves", "5 minutos"]],
+                ejercicios: [["Sentadilla", "3 series × 8-12"], ["Puente de glúteos", "3 series × 12-15"], ["Desplante", "3 series × 8-10 por lado"], ["Elevación de talones", "3 series × 12-15"]],
+                cardio: ["Caminata rápida o bicicleta suave", "12-15 minutos"],
+                calma: ["Respiración y movilidad suave", "5 minutos"]
+            }
+        },
+
+        avanzado: {
+            A: {
+                nombre: "Tren superior",
+                calentamiento: [["Marcha activa", "5 minutos"], ["Movilidad dinámica de hombros", "5 minutos"], ["Activación de espalda y brazos", "5 minutos"]],
+                ejercicios: [["Flexiones o press", "3 series × 8-12"], ["Remo", "3 series × 8-12"], ["Press de hombros", "3 series × 8-12"], ["Trabajo de brazos", "3 series × 10-12"]],
+                cardio: ["Caminata rápida, bicicleta o elíptica", "15-20 minutos"],
+                calma: ["Respiración y movilidad suave", "5 minutos"]
+            },
+            B: {
+                nombre: "Pierna + glúteo",
+                calentamiento: [["Marcha activa", "5 minutos"], ["Movilidad dinámica de cadera y tobillos", "5 minutos"], ["Sentadillas progresivas", "5 minutos"]],
+                ejercicios: [["Sentadilla", "3 series × 8-12"], ["Puente de glúteos", "3 series × 12-15"], ["Desplante", "3 series × 8-10 por lado"], ["Trabajo de pierna", "3 series"]],
+                cardio: ["Caminata rápida, bicicleta o elíptica", "15-20 minutos"],
+                calma: ["Respiración y movilidad suave", "5 minutos"]
+            },
+            C: {
+                nombre: "Tren superior + core",
+                calentamiento: [["Marcha activa", "5 minutos"], ["Movilidad dinámica de hombros", "5 minutos"], ["Activación de core", "5 minutos"]],
+                ejercicios: [["Flexiones o press", "3 series × 8-12"], ["Remo", "3 series × 8-12"], ["Press de hombros", "3 series × 8-12"], ["Trabajo de core", "3 series"]],
+                cardio: ["Caminata rápida, bicicleta o elíptica", "15-20 minutos"],
+                calma: ["Respiración y movilidad suave", "5 minutos"]
+            },
+            D: {
+                nombre: "Pierna + glúteo",
+                calentamiento: [["Marcha activa", "5 minutos"], ["Movilidad dinámica de cadera y tobillos", "5 minutos"], ["Sentadillas progresivas", "5 minutos"]],
+                ejercicios: [["Sentadilla", "3 series × 8-12"], ["Puente de glúteos", "3 series × 12-15"], ["Desplante", "3 series × 8-10 por lado"], ["Trabajo de pierna", "3 series"]],
+                cardio: ["Caminata rápida, bicicleta o elíptica", "15-20 minutos"],
+                calma: ["Respiración y movilidad suave", "5 minutos"]
+            }
+        }
+    };
+
+
+    /* =====================================================
+       PORTADA
+    ===================================================== */
+
+    function mostrarPortada() {
+
+        document.getElementById("app").innerHTML = `
+
+            <div class="portada">
+
+                <div class="portada-card">
+
+                    <div class="logo">NURA</div>
+
+                    <h1>Tu bienestar comienza aquí</h1>
+
+                    <p>
+                        NURA te ayudará a crear una alimentación sencilla
+                        y una rutina de ejercicio adaptada a ti.
+                    </p>
+
+                    <button class="btn-principal" onclick="iniciarCuestionario()">
+                        Comenzar →
+                    </button>
+
+                    <div class="mini-text">
+                        Alimentación · Movimiento · Bienestar
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+    }
+
+
+    /* =====================================================
+       CUESTIONARIO
+    ===================================================== */
+
+    function iniciarCuestionario() {
+
+        pasoActual = 1;
+
+        mostrarCuestionario();
+    }
+
+
+    function mostrarCuestionario() {
+
+        document.getElementById("app").innerHTML = `
+
+            <div class="pantalla">
+
+                <div class="contenedor">
+
+                    <div class="cabecera">
+                        <div class="logo">NURA</div>
+                        <p>Vamos a conocerte un poco mejor.</p>
+                    </div>
+
+                    <div class="progreso">
+                        <div
+                            id="progresoBarra"
+                            class="progreso-barra">
+                        </div>
+                    </div>
+
+                    <div class="card">
+
+                        ${crearPaso(1)}
+                        ${crearPaso(2)}
+                        ${crearPaso(3)}
+                        ${crearPaso(4)}
+                        ${crearPaso(5)}
+                        ${crearPaso(6)}
+                        ${crearPaso(7)}
+                        ${crearPaso(8)}
+                        ${crearPaso(9)}
+                        ${crearPaso(10)}
+                        ${crearPaso(11)}
+                        ${crearPaso(12)}
+
+                        <div class="navegacion">
+
+                            <button
+                                id="btnAnterior"
+                                class="btn-secundario"
+                                onclick="anteriorPaso()">
+                                Atrás
+                            </button>
+
+                            <button
+                                id="btnSiguiente"
+                                class="btn-siguiente"
+                                onclick="siguientePaso()">
+                                Siguiente
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+        actualizarPaso();
+    }
+
+
+    function crearPaso(numero) {
+
+        if (numero === 1) {
+
+            return `
+                <div class="paso" id="paso1">
+
+                    <h3>¿Cómo te llamas?</h3>
+
+                    <p>
+                        Queremos que NURA pueda hablar contigo de manera más personal.
+                    </p>
+
+                    <input
+                        id="nombre"
+                        type="text"
+                        placeholder="Escribe tu nombre"
+                        value="${datosNura.nombre}">
+                </div>
+            `;
+        }
+
+
+        if (numero === 2) {
+
+            return `
+                <div class="paso" id="paso2">
+
+                    <h3>¿Qué voz prefieres para NURA?</h3>
+
+                    <p>
+                        Más adelante podremos conectar una voz real.
+                    </p>
+
+                    <div class="opciones">
+
+                        ${crearOpcion("voz", "femenina", "🎙️ Voz femenina")}
+                        ${crearOpcion("voz", "masculina", "🎙️ Voz masculina")}
+                        ${crearOpcion("voz", "personalizada", "❤️ Voz personalizada")}
+
+                    </div>
+
+                </div>
+            `;
+        }
+
+
+        if (numero === 3) {
+
+            return `
+                <div class="paso" id="paso3">
+
+                    <h3>¿Cuál es tu sexo?</h3>
+
+                    <div class="opciones">
+
+                        ${crearOpcion("sexo", "femenino", "Mujer")}
+                        ${crearOpcion("sexo", "masculino", "Hombre")}
+
+                    </div>
+
+                </div>
+            `;
+        }
+
+
+        if (numero === 4) {
+
+            return `
+                <div class="paso" id="paso4">
+
+                    <h3>¿Qué edad tienes?</h3>
+
+                    <p>
+                        Esto ayuda a personalizar mejor el plan.
+                    </p>
+
+                    <input
+                        id="edad"
+                        type="number"
+                        min="1"
+                        max="100"
+                        placeholder="Ej. 42"
+                        value="${datosNura.edad}">
+                </div>
+            `;
+        }
+
+
+        if (numero === 5) {
+
+            return `
+                <div class="paso" id="paso5">
+
+                    <h3>¿Cuánto pesas?</h3>
+
+                    <p>
+                        Introduce tu peso aproximado en kilogramos.
+                    </p>
+
+                    <input
+                        id="peso"
+                        type="number"
+                        min="1"
+                        placeholder="Ej. 80"
+                        value="${datosNura.peso}">
+                </div>
+            `;
+        }
+
+
+        if (numero === 6) {
+
+            return `
+                <div class="paso" id="paso6">
+
+                    <h3>¿Cuánto mides?</h3>
+
+                    <p>
+                        Introduce tu estatura en centímetros.
+                    </p>
+
+                    <input
+                        id="altura"
+                        type="number"
+                        min="50"
+                        placeholder="Ej. 175"
+                        value="${datosNura.altura}">
+                </div>
+            `;
+        }
+
+
+        if (numero === 7) {
+
+            return `
+                <div class="paso" id="paso7">
+
+                    <h3>¿Cómo es tu actividad diaria?</h3>
+
+                    <div class="opciones">
+
+                        ${crearOpcion(
+                            "actividad",
+                            "poco",
+                            "Poco activo",
+                            "Paso gran parte del día sentado."
+                        )}
+
+                        ${crearOpcion(
+                            "actividad",
+                            "moderado",
+                            "Moderadamente activo",
+                            "Me muevo durante buena parte del día."
+                        )}
+
+                        ${crearOpcion(
+                            "actividad",
+                            "activo",
+                            "Activo",
+                            "Tengo bastante movimiento durante el día."
+                        )}
+
+                    </div>
+
+                </div>
+            `;
+        }
+
+
+        if (numero === 8) {
+
+            return `
+                <div class="paso" id="paso8">
+
+                    <h3>¿Qué experiencia tienes haciendo ejercicio?</h3>
+
+                    <div class="opciones">
+
+                        ${crearOpcion(
+                            "experiencia",
+                            "principiante",
+                            "Principiante",
+                            "Estoy comenzando."
+                        )}
+
+                        ${crearOpcion(
+                            "experiencia",
+                            "intermedio",
+                            "Intermedio",
+                            "Ya tengo algo de experiencia."
+                        )}
+
+                        ${crearOpcion(
+                            "experiencia",
+                            "avanzado",
+                            "Avanzado",
+                            "Tengo bastante experiencia."
+                        )}
+
+                    </div>
+
+                </div>
+            `;
+        }
+
+
+        if (numero === 9) {
+
+            return `
+                <div class="paso" id="paso9">
+
+                    <h3>¿Cuál es tu principal objetivo?</h3>
+
+                    <div class="opciones">
+
+                        ${crearOpcion(
+                            "objetivo",
+                            "habitos",
+                            "Crear hábitos saludables"
+                        )}
+
+                        ${crearOpcion(
+                            "objetivo",
+                            "condicion",
+                            "Mejorar mi condición física"
+                        )}
+
+                        ${crearOpcion(
+                            "objetivo",
+                            "fuerza",
+                            "Ganar fuerza"
+                        )}
+
+                        ${crearOpcion(
+                            "objetivo",
+                            "composicion",
+                            "Mejorar mi composición corporal"
+                        )}
+
+                    </div>
+
+                </div>
+            `;
+        }
+
+
+        if (numero === 10) {
+
+            return `
+                <div class="paso" id="paso10">
+
+                    <h3>¿Cómo prefieres que NURA prepare tus comidas?</h3>
+
+                    <p>
+                        Esta preferencia ayuda a NURA a orientar la variedad de alimentos de tu menú. Después podrás indicarle alimentos que te gustan, que no consumes o que tienes disponibles.
+                    </p>
+
+                    <div class="opciones">
+
+                        ${crearOpcion(
+                            "alimentacion",
+                            "variada",
+                            "🥘 Variada y flexible",
+                            "Combina diferentes grupos de alimentos y propone comidas sencillas y variadas."
+                        )}
+
+                        ${crearOpcion(
+                            "alimentacion",
+                            "vegetal",
+                            "🌱 Más basada en vegetales",
+                            "Da mayor protagonismo a verduras, frutas, leguminosas y otros alimentos vegetales."
+                        )}
+
+                    </div>
+
+                </div>
+            `;
+        }
+
+
+        if (numero === 11) {
+
+            return `
+                <div class="paso" id="paso11">
+
+                    <h3>¿Qué alimentos te gustaría incluir?</h3>
+
+                    <p>
+                        Elige los alimentos que NURA puede usar para construir tu semana. No necesitas seleccionar todo; después podremos ajustar tus preferencias.
+                    </p>
+
+                    <div class="alimentos-encabezado">
+                        <strong>❤️ Alimentos que sí te gustan</strong>
+                        <button type="button" class="btn-mini" onclick="seleccionarTodosAlimentos()">Seleccionar todos</button>
+                    </div>
+
+                    <div class="alimentos-grid">
+                        ${alimentosDisponibles.map(alimento => `
+                            <button
+                                type="button"
+                                class="alimento-btn ${datosNura.alimentosIncluidos.includes(alimento[0]) ? "seleccionado" : ""}"
+                                id="incluye-${alimento[0]}"
+                                onclick="toggleAlimento('incluidos','${alimento[0]}')">
+                                ${alimento[1]}
+                            </button>
+                        `).join("")}
+                    </div>
+
+                    <div class="contador-alimentos" id="contadorIncluidos">
+                        ${datosNura.alimentosIncluidos.length} alimentos seleccionados
+                    </div>
+
+                    <div class="alimentos-evitar">
+                        <strong>🚫 ¿Hay alimentos que prefieres evitar?</strong>
+                        <small>Opcional. NURA no los utilizará en tu menú.</small>
+
+                        <div class="alimentos-grid">
+                            ${alimentosDisponibles.map(alimento => `
+                                <button
+                                    type="button"
+                                    class="alimento-btn evitar-btn ${datosNura.alimentosEvitar.includes(alimento[0]) ? "evitado" : ""}"
+                                    id="evita-${alimento[0]}"
+                                    onclick="toggleAlimento('evitar','${alimento[0]}')">
+                                    ${alimento[1]}
+                                </button>
+                            `).join("")}
+                        </div>
+                    </div>
+
+                </div>
+            `;
+        }
+
+
+        if (numero === 12) {
+
+            return `
+                <div class="paso" id="paso12">
+
+                    <h3>¿Qué días puedes entrenar?</h3>
+
+                    <p>
+                        Selecciona todos los días que normalmente tienes disponibles.
+                    </p>
+
+                    <div class="dias-grid">
+
+                        ${diasSemana.map((dia, indice) => `
+                            <button
+                                type="button"
+                                class="dia-btn ${datosNura.dias.includes(dia) ? "seleccionado" : ""}"
+                                id="dia-${indice}"
+                                onclick="seleccionarDia(${indice})">
+                                ${dia}
+                            </button>
+                        `).join("")}
+
+                    </div>
+
+                    <div
+                        id="contadorDias"
+                        class="contador-dias">
+                        ${datosNura.dias.length} ${datosNura.dias.length === 1 ? "día" : "días"} seleccionados
+                    </div>
+
+                </div>
+            `;
+        }
+
+        return "";
+    }
+
+
+    function crearOpcion(campo, valor, titulo, descripcion = "") {
+
+        const seleccionado = datosNura[campo] === valor;
+
+        return `
+            <div
+                class="opcion ${seleccionado ? "seleccionada" : ""}"
+                onclick="seleccionarOpcion('${campo}', '${valor}', this)">
+
+                <input
+                    type="radio"
+                    name="${campo}"
+                    value="${valor}">
+
+                <strong>${titulo}</strong>
+
+                ${descripcion ? `<small>${descripcion}</small>` : ""}
+
+            </div>
+        `;
+    }
+
+
+    function seleccionarOpcion(campo, valor, elemento) {
+
+        datosNura[campo] = valor;
+
+        const opciones = elemento.parentElement.querySelectorAll(".opcion");
+
+        opciones.forEach(opcion => {
+            opcion.classList.remove("seleccionada");
+        });
+
+        elemento.classList.add("seleccionada");
+    }
+
+
+    function toggleAlimento(tipo, valor) {
+
+        if (tipo === "incluidos") {
+            if (datosNura.alimentosIncluidos.includes(valor)) {
+                datosNura.alimentosIncluidos = datosNura.alimentosIncluidos.filter(a => a !== valor);
+            } else {
+                datosNura.alimentosIncluidos.push(valor);
+                datosNura.alimentosEvitar = datosNura.alimentosEvitar.filter(a => a !== valor);
+            }
+        }
+
+        if (tipo === "evitar") {
+            if (datosNura.alimentosEvitar.includes(valor)) {
+                datosNura.alimentosEvitar = datosNura.alimentosEvitar.filter(a => a !== valor);
+            } else {
+                datosNura.alimentosEvitar.push(valor);
+                datosNura.alimentosIncluidos = datosNura.alimentosIncluidos.filter(a => a !== valor);
+            }
+        }
+
+        const incluye = document.getElementById(`incluye-${valor}`);
+        const evita = document.getElementById(`evita-${valor}`);
+
+        if (incluye) incluye.classList.toggle("seleccionado", datosNura.alimentosIncluidos.includes(valor));
+        if (evita) evita.classList.toggle("evitado", datosNura.alimentosEvitar.includes(valor));
+
+        const contador = document.getElementById("contadorIncluidos");
+        if (contador) {
+            contador.textContent = `${datosNura.alimentosIncluidos.length} ${datosNura.alimentosIncluidos.length === 1 ? "alimento seleccionado" : "alimentos seleccionados"}`;
+        }
+    }
+
+
+    function seleccionarTodosAlimentos() {
+
+        datosNura.alimentosIncluidos = alimentosDisponibles
+            .map(alimento => alimento[0])
+            .filter(valor => !datosNura.alimentosEvitar.includes(valor));
+
+        document.querySelectorAll(".alimento-btn:not(.evitar-btn)").forEach(boton => {
+            const valor = boton.id.replace("incluye-", "");
+            boton.classList.toggle("seleccionado", datosNura.alimentosIncluidos.includes(valor));
+        });
+
+        const contador = document.getElementById("contadorIncluidos");
+        if (contador) {
+            contador.textContent = `${datosNura.alimentosIncluidos.length} alimentos seleccionados`;
+        }
+    }
+
+
+    function seleccionarDia(indice) {
+
+        const dia = diasSemana[indice];
+
+        if (datosNura.dias.includes(dia)) {
+
+            datosNura.dias = datosNura.dias.filter(
+                d => d !== dia
+            );
+
+        } else {
+
+            datosNura.dias.push(dia);
+        }
+
+        const boton = document.getElementById(`dia-${indice}`);
+
+        boton.classList.toggle(
+            "seleccionado",
+            datosNura.dias.includes(dia)
+        );
+
+        actualizarContadorDias();
+    }
+
+
+    function actualizarContadorDias() {
+
+        const contador = document.getElementById("contadorDias");
+
+        if (!contador) {
+            return;
+        }
+
+        const cantidad = datosNura.dias.length;
+
+        contador.textContent =
+            `${cantidad} ${cantidad === 1 ? "día" : "días"} seleccionados`;
+    }
+
+
+    function guardarPaso() {
+
+        if (pasoActual === 1) {
+
+            const campo = document.getElementById("nombre");
+
+            if (campo) {
+                datosNura.nombre = campo.value.trim();
+            }
+
+        }
+
+        if (pasoActual === 4) {
+
+            const campo = document.getElementById("edad");
+
+            if (campo) {
+                datosNura.edad = campo.value;
+            }
+
+        }
+
+        if (pasoActual === 5) {
+
+            const campo = document.getElementById("peso");
+
+            if (campo) {
+                datosNura.peso = campo.value;
+            }
+
+        }
+
+        if (pasoActual === 6) {
+
+            const campo = document.getElementById("altura");
+
+            if (campo) {
+                datosNura.altura = campo.value;
+            }
+
+        }
+
+        if (pasoActual === 10) {
+            // La preferencia alimentaria se guarda directamente al seleccionar la opción.
+        }
+    }
+
+
+    function validarPaso() {
+
+        if (pasoActual === 1 && !datosNura.nombre) {
+
+            alert("Escribe tu nombre para continuar.");
+
+            return false;
+        }
+
+
+        if (pasoActual === 2 && !datosNura.voz) {
+
+            alert("Selecciona una voz para NURA.");
+
+            return false;
+        }
+
+
+        if (pasoActual === 3 && !datosNura.sexo) {
+
+            alert("Selecciona una opción.");
+
+            return false;
+        }
+
+
+        if (pasoActual === 4 && !datosNura.edad) {
+
+            alert("Indica tu edad.");
+
+            return false;
+        }
+
+
+        if (pasoActual === 5 && !datosNura.peso) {
+
+            alert("Indica tu peso.");
+
+            return false;
+        }
+
+
+        if (pasoActual === 6 && !datosNura.altura) {
+
+            alert("Indica tu estatura.");
+
+            return false;
+        }
+
+
+        if (pasoActual === 7 && !datosNura.actividad) {
+
+            alert("Selecciona tu nivel de actividad.");
+
+            return false;
+        }
+
+
+        if (pasoActual === 8 && !datosNura.experiencia) {
+
+            alert("Selecciona tu experiencia.");
+
+            return false;
+        }
+
+
+        if (pasoActual === 9 && !datosNura.objetivo) {
+
+            alert("Selecciona tu objetivo.");
+
+            return false;
+        }
+
+
+        if (pasoActual === 10 && !datosNura.alimentacion) {
+
+            alert("Selecciona tu preferencia alimentaria.");
+
+            return false;
+        }
+
+
+        if (pasoActual === 11 && datosNura.alimentosIncluidos.length < 3) {
+
+            alert("Selecciona al menos 3 alimentos que te gustaría incluir.");
+
+            return false;
+        }
+
+
+        if (pasoActual === 12 && datosNura.dias.length === 0) {
+
+            alert("Selecciona al menos un día para entrenar.");
+
+            return false;
+        }
+
+
+        return true;
+    }
+
+
+    function siguientePaso() {
+
+        guardarPaso();
+
+        if (!validarPaso()) {
+            return;
+        }
+
+        if (pasoActual < 12) {
+
+            pasoActual++;
+
+            actualizarPaso();
+
+        } else {
+
+            generarPlan();
+        }
+    }
+
+
+    function anteriorPaso() {
+
+        guardarPaso();
+
+        if (pasoActual > 1) {
+
+            pasoActual--;
+
+            actualizarPaso();
+        }
+    }
+
+
+    function actualizarPaso() {
+
+        document.querySelectorAll(".paso").forEach(paso => {
+            paso.classList.remove("activo");
+        });
+
+        const paso = document.getElementById(`paso${pasoActual}`);
+
+        if (paso) {
+            paso.classList.add("activo");
+        }
+
+        const porcentaje = (pasoActual / 12) * 100;
+
+        const barra = document.getElementById("progresoBarra");
+
+        if (barra) {
+            barra.style.width = `${porcentaje}%`;
+        }
+
+        const anterior = document.getElementById("btnAnterior");
+
+        if (anterior) {
+            anterior.style.visibility =
+                pasoActual === 1 ? "hidden" : "visible";
+        }
+
+        const siguiente = document.getElementById("btnSiguiente");
+
+        if (siguiente) {
+
+            siguiente.textContent =
+                pasoActual === 12
+                    ? "Crear mi plan →"
+                    : "Siguiente";
+        }
+
+        if (pasoActual === 12) {
+            actualizarContadorDias();
+        }
+    }
+
+
+    /* =====================================================
+       GENERAR PLAN
+    ===================================================== */
+
+    function menuEsCompatible(menu) {
+
+        const evitar = datosNura.alimentosEvitar || [];
+        const incluidos = datosNura.alimentosIncluidos || [];
+
+        if (menu.tags.some(tag => evitar.includes(tag))) {
+            return false;
+        }
+
+        return menu.tags.some(tag => incluidos.includes(tag));
+    }
+
+
+    function obtenerMenuSemana(lista, usados) {
+
+        let disponibles = lista.filter(menuEsCompatible);
+
+        if (disponibles.length === 0) {
+            disponibles = lista.filter(menu => !menu.tags.some(tag => (datosNura.alimentosEvitar || []).includes(tag)));
+        }
+
+        if (disponibles.length === 0) {
+            disponibles = lista;
+        }
+
+        const noUsados = disponibles.filter(menu => !usados.includes(menu.texto));
+        const pool = noUsados.length ? noUsados : disponibles;
+        const elegido = pool[Math.floor(Math.random() * pool.length)];
+
+        usados.push(elegido.texto);
+        return elegido.texto;
+    }
+
+
+    function generarPlan() {
+
+        const letrasSesiones = ["A", "B", "C", "D"];
+        let numeroSesion = 0;
+        const usadosDesayuno = [];
+        const usadosComida = [];
+        const usadosCena = [];
+
+        const semana = diasSemana.map(dia => {
+
+            const entrenar = datosNura.dias.includes(dia);
+            const letraSesion = entrenar
+                ? letrasSesiones[numeroSesion % letrasSesiones.length]
+                : null;
+
+            if (entrenar) {
+                numeroSesion++;
+            }
+
+            return {
+                dia,
+                entrenar,
+                sesion: letraSesion,
+                desayuno: obtenerMenuSemana(menuDesayuno, usadosDesayuno),
+                comida: obtenerMenuSemana(menuComida, usadosComida),
+                cena: obtenerMenuSemana(menuCena, usadosCena)
+            };
+        });
+
+        mostrarPlanSemanal(semana);
+    }
+
+
+    function mostrarPlanSemanal(semana) {
+
+        const nombre =
+            datosNura.nombre || "amigo";
+
+        document.getElementById("app").innerHTML = `
+
+            <div class="pantalla">
+
+                <div class="contenedor">
+
+                    <div class="cabecera">
+
+                        <div class="logo">NURA</div>
+
+                        <p>
+                            Tu plan semanal personalizado
+                        </p>
+
+                    </div>
+
+
+                    <div class="bienvenida">
+
+                        <h2>
+                            ¡Hola, ${nombre}! 👋
+                        </h2>
+
+                        <p>
+                            NURA preparó tu semana completa.
+                            Tendrás alimentación todos los días
+                            y entrenamiento en los días que elegiste.
+                        </p>
+
+                    </div>
+
+
+                    <div class="semana">
+
+                        ${semana.map((dia, indice) =>
+                            crearDiaCard(dia, indice)
+                        ).join("")}
+
+                    </div>
+
+
+                    <button
+                        class="hablar"
+                        onclick="mostrarHistorialNura()">
+
+                        📊 Ver mi historial
+
+                    </button>
+
+                    <button
+                        class="hablar"
+                        onclick="mostrarProgresoNura()">
+
+                        📈 Ver mi progreso
+
+                    </button>
+
+                    <button
+                        class="hablar"
+                        onclick="hablarConNura()">
+
+                        🎙️ Hablar con NURA
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+    }
+
+
+    function obtenerRutinaSesion(letraSesion) {
+
+        const nivel = datosNura.experiencia || "principiante";
+        const rutinasNivel = rutinasPorSesion[nivel] || rutinasPorSesion.principiante;
+
+        return rutinasNivel[letraSesion || "A"] || rutinasNivel.A;
+    }
+
+
+    function obtenerSeriesParaNivel() {
+
+        if (datosNura.experiencia === "avanzado") {
+            return 4;
+        }
+
+        if (datosNura.experiencia === "intermedio") {
+            return 3;
+        }
+
+        return 2;
+    }
+
+
+    function obtenerDatosEjercicio(ejercicio) {
+
+        const texto = ejercicio[1] || "";
+        const coincidencia = texto.match(/^(\d+)\s+series\s+×\s+(.+)$/i);
+
+        if (!coincidencia) {
+            return {
+                nombre: ejercicio[0],
+                series: 1,
+                objetivo: texto
+            };
+        }
+
+        return {
+            nombre: ejercicio[0],
+            series: obtenerSeriesParaNivel(),
+            objetivo: coincidencia[2]
+        };
+    }
+
+
+    function formatearTextoEjercicio(ejercicio) {
+
+        const datos = obtenerDatosEjercicio(ejercicio);
+
+        if (!ejercicio[1].match(/^\d+\s+series\s+×\s+(.+)$/i)) {
+            return ejercicio[1];
+        }
+
+        return `${datos.series} series × ${datos.objetivo}`;
+    }
+
+
+    function crearMiniLista(lista) {
+
+        return lista.map(item => `
+            <div class="mini-ejercicio">
+                <span>${item[0]}</span>
+                <strong>${formatearTextoEjercicio(item)}</strong>
+            </div>
+        `).join("");
+    }
+
+
+    function obtenerTextoMaquina(indice) {
+
+        const maquina = datosNura.preparacionMaquina[indice];
+
+        if (!maquina) {
+            return "Selecciona una opción para comenzar.";
+        }
+
+        const encontrada = maquinasPreparacion.find(item => item[0] === maquina);
+        return encontrada
+            ? `Preparación elegida: <strong>${encontrada[1]}</strong> · 25 minutos`
+            : "Selecciona una opción para comenzar.";
+    }
+
+
+    function crearBotonesMaquinas(indice) {
+
+        const seleccion = datosNura.preparacionMaquina[indice];
+
+        return maquinasPreparacion.map(maquina => `
+            <button
+                type="button"
+                class="maquina-btn ${seleccion === maquina[0] ? "seleccionada" : ""}"
+                onclick="seleccionarMaquinaPreparacion(${indice}, '${maquina[0]}')">
+                ${maquina[1]}
+            </button>
+        `).join("");
+    }
+
+
+    function seleccionarMaquinaPreparacion(indice, maquina) {
+
+        datosNura.preparacionMaquina[indice] = maquina;
+
+        document.querySelectorAll(`#preparacion-${indice}`).forEach(elemento => {
+            elemento.innerHTML = obtenerTextoMaquina(indice);
+        });
+
+        const contenedor = document.querySelector(`#preparacion-${indice}`)?.previousElementSibling;
+
+        if (contenedor) {
+            contenedor.innerHTML = crearBotonesMaquinas(indice);
+        }
+    }
+
+
+    function crearDiaCard(dia, indice) {
+
+        const etiqueta = dia.entrenar ? "🏋️ Entrenamiento" : "🌿 Descanso";
+        const badgeClase = dia.entrenar ? "badge" : "badge badge-descanso";
+        const rutina = dia.entrenar ? obtenerRutinaSesion(dia.sesion) : null;
+
+        return `
+            <div class="dia-card">
+                <div class="dia-titulo">
+                    <div>
+                        <h3>${dia.dia}</h3>
+                        ${dia.entrenar ? `<span class="sesion-badge">Sesión ${dia.sesion} · ${rutina.nombre}</span>` : ""}
+                    </div>
+                    <span class="${badgeClase}">${etiqueta}</span>
+                </div>
+
+                <div class="comida">
+                    <div class="comida-header">
+                        <strong>🍳 Desayuno</strong>
+                        <button class="btn-cambiar" onclick="cambiarComida(${indice}, 'desayuno')">🔄 Cambiar</button>
+                    </div>
+                    <div id="desayuno-${indice}" class="comida-texto">${dia.desayuno}</div>
+                </div>
+
+                <div class="comida">
+                    <div class="comida-header">
+                        <strong>🍲 Comida</strong>
+                        <button class="btn-cambiar" onclick="cambiarComida(${indice}, 'comida')">🔄 Cambiar</button>
+                    </div>
+                    <div id="comida-${indice}" class="comida-texto">${dia.comida}</div>
+                </div>
+
+                <div class="comida">
+                    <div class="comida-header">
+                        <strong>🌙 Cena</strong>
+                        <button class="btn-cambiar" onclick="cambiarComida(${indice}, 'cena')">🔄 Cambiar</button>
+                    </div>
+                    <div id="cena-${indice}" class="comida-texto">${dia.cena}</div>
+                </div>
+
+                ${dia.entrenar ? `
+                    <div class="entrenamiento">
+                        <h4>🏋️ Sesión ${dia.sesion}: ${rutina.nombre}</h4>
+
+                        <div class="bloque-entrenamiento preparacion-box">
+                            <h5>🔥 Preparación · 25 minutos</h5>
+                            <p class="preparacion-texto">Elige la máquina que prefieras. Mantén un ritmo cómodo y progresivo durante 25 minutos; la idea es preparar tu cuerpo, no agotarte antes de la rutina.</p>
+                            <div class="maquinas-grid">
+                                ${crearBotonesMaquinas(indice)}
+                            </div>
+                            <div class="preparacion-seleccion" id="preparacion-${indice}">
+                                ${obtenerTextoMaquina(indice)}
+                            </div>
+                        </div>
+
+                        <div class="bloque-entrenamiento">
+                            <h5>🏋️ Trabajo principal</h5>
+                            ${crearMiniLista(rutina.ejercicios)}
+                        </div>
+
+                        <div class="cardio-box">
+                            <strong>❤️ Cardio final · opcional</strong><br>
+                            ${rutina.cardio[0]} · ${rutina.cardio[1]}
+                        </div>
+
+                        <div class="calma-box">
+                            <strong>🌿 Vuelta a la calma</strong><br>
+                            ${rutina.calma[0]} · ${rutina.calma[1]}
+                        </div>
+
+                        <button class="boton-entrenar" onclick="iniciarEntrenamiento('${dia.sesion}', ${indice})">▶️ Empezar sesión</button>
+                    </div>
+                ` : `
+                    <div class="descanso">
+                        <strong>🌿 Día de recuperación</strong>
+                        <br><br>
+                        Hoy no tienes entrenamiento. Mantén tus tres comidas normales, hidrátate y aprovecha el día para recuperarte y moverte de forma cómoda.
+                    </div>
+                `}
+            </div>
+        `;
+    }
+
+
+    /* =====================================================
+       CAMBIAR COMIDAS
+    ===================================================== */
+
+    function cambiarComida(indice, tipo) {
+
+        let lista;
+
+        if (tipo === "desayuno") lista = menuDesayuno;
+        if (tipo === "comida") lista = menuComida;
+        if (tipo === "cena") lista = menuCena;
+
+        const actual = document.getElementById(`${tipo}-${indice}`).textContent.trim();
+        const compatibles = lista.filter(menu => menuEsCompatible(menu) && menu.texto !== actual);
+        const opciones = compatibles.length ? compatibles : lista.filter(menu => !menu.tags.some(tag => (datosNura.alimentosEvitar || []).includes(tag)) && menu.texto !== actual);
+
+        if (!opciones.length) return;
+
+        const nueva = opciones[Math.floor(Math.random() * opciones.length)];
+
+        document.getElementById(`${tipo}-${indice}`).textContent = nueva.texto;
+    }
+
+
+    /* =====================================================
+       ENTRENAMIENTO
+    ===================================================== */
+
+    let ejercicioActual = 0;
+    let serieActual = 1;
+    let sesionActual = "A";
+    let indiceDiaActual = null;
+    let intervaloTimer = null;
+    let tipoTimerActual = "";
+    let inicioSesionNura = null;
+    let seriesCompletadasSesion = 0;
+
+    let historialNura = [];
+
+    try {
+        historialNura = JSON.parse(localStorage.getItem("nuraHistorial") || "[]");
+        if (!Array.isArray(historialNura)) historialNura = [];
+    } catch (e) {
+        historialNura = [];
+    }
+
+    const frasesMotivacion = [
+        "¡Vamos! Empieza a tu ritmo y concéntrate en el movimiento.",
+        "¡Muy bien! Mantén una respiración cómoda.",
+        "¡Excelente trabajo! Sigue con buena técnica.",
+        "Respira. No tienes que hacerlo rápido para hacerlo bien.",
+        "¡Una más! Vas avanzando muy bien.",
+        "Escucha a tu cuerpo y trabaja a un ritmo que puedas mantener.",
+        "¡Excelente! Terminemos esta sesión con calma."
+    ];
+
+
+    function obtenerTextoMaquinaParaSesion() {
+
+        const maquina = indiceDiaActual !== null
+            ? datosNura.preparacionMaquina[indiceDiaActual]
+            : null;
+
+        const encontrada = maquinasPreparacion.find(item => item[0] === maquina);
+
+        return encontrada
+            ? `Hoy elegiste ${encontrada[1]}. Ritmo cómodo y progresivo.`
+            : "Elige caminadora, escalera, elíptica o bicicleta a un ritmo cómodo.";
+    }
+
+
+    function iniciarEntrenamiento(letraSesion = "A", indiceDia = null) {
+
+        if (intervaloTimer) {
+            clearInterval(intervaloTimer);
+            intervaloTimer = null;
+        }
+
+        sesionActual = letraSesion;
+        indiceDiaActual = indiceDia;
+        ejercicioActual = 0;
+        serieActual = 1;
+        seriesCompletadasSesion = 0;
+        inicioSesionNura = Date.now();
+        mostrarPreferenciaCardio();
+    }
+
+
+    function mostrarPreferenciaCardio() {
+
+        const maquinaActual = indiceDiaActual !== null
+            ? datosNura.preparacionMaquina[indiceDiaActual]
+            : null;
+
+        const encontrada = maquinasPreparacion.find(item => item[0] === maquinaActual);
+        const nombreMaquina = encontrada ? encontrada[1] : "Ninguna seleccionada";
+
+        document.getElementById("app").innerHTML = `
+            <div class="pantalla">
+                <div class="contenedor">
+                    <div class="card entrenamiento-pantalla">
+                        <div class="logo">NURA</div>
+
+                        <div class="ejercicio-numero">
+                            Sesión ${sesionActual} · ${obtenerRutinaSesion(sesionActual).nombre}
+                        </div>
+
+                        <h2 style="font-size:26px;margin:15px 0 10px;">
+                            ❤️ ¿Cuándo quieres hacer tu cardio?
+                        </h2>
+
+                        <p style="color:#607d7a;line-height:1.6;margin-bottom:20px;">
+                            Tú decides cómo prefieres organizar tu sesión de hoy.
+                        </p>
+
+                        <div class="opciones" style="text-align:left;">
+                            <button class="opcion" type="button" onclick="seleccionarMomentoCardio('inicio')">
+                                <strong>🔥 Cardio al inicio</strong>
+                                <small>25 minutos de cardio/ preparación antes de la rutina.</small>
+                            </button>
+
+                            <button class="opcion" type="button" onclick="seleccionarMomentoCardio('final')">
+                                <strong>🏋️ Cardio al final</strong>
+                                <small>Primero entrenas y haces tu cardio al terminar.</small>
+                            </button>
+
+                            <button class="opcion" type="button" onclick="seleccionarMomentoCardio('ninguno')">
+                                <strong>🌿 Sin cardio hoy</strong>
+                                <small>Hacemos la preparación y después pasamos al entrenamiento.</small>
+                            </button>
+                        </div>
+
+                        <div class="preparacion-resumen" style="margin-top:20px;">
+                            <strong>🚴 Máquina elegida:</strong><br>
+                            ${nombreMaquina}
+                        </div>
+
+                        <button class="btn-secundario" style="width:100%;margin-top:12px;" onclick="mostrarPlanDespuesDeEntrenamiento()">
+                            ← Regresar al plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+
+    function seleccionarMomentoCardio(momento) {
+
+        if (momento === "inicio") {
+            mostrarPreparacionSesion(true);
+            return;
+        }
+
+        if (momento === "final") {
+            mostrarPreparacionSesion(false);
+            return;
+        }
+
+        if (momento === "ninguno") {
+            mostrarCalentamientoBreve();
+        }
+    }
+
+
+    function mostrarPreparacionSesion(cardioAlInicio) {
+
+        const maquina = indiceDiaActual !== null
+            ? datosNura.preparacionMaquina[indiceDiaActual]
+            : null;
+
+        const encontrada = maquinasPreparacion.find(item => item[0] === maquina);
+        const nombreMaquina = encontrada ? encontrada[1] : "la máquina que prefieras";
+
+        window.momentoCardioNura = cardioAlInicio ? "inicio" : "final";
+
+        document.getElementById("app").innerHTML = `
+            <div class="pantalla">
+                <div class="contenedor">
+                    <div class="card entrenamiento-pantalla">
+                        <div class="logo">NURA</div>
+
+                        <div class="ejercicio-numero">🔥 Preparación de la sesión</div>
+
+                        <h2 class="ejercicio-grande">${cardioAlInicio ? "❤️ Cardio al inicio" : "🔥 Preparación"}</h2>
+
+                        <div class="preparacion-resumen">
+                            ${cardioAlInicio
+                                ? `<strong>🚴 ${nombreMaquina}</strong><br>25 minutos a un ritmo cómodo y progresivo.`
+                                : `<strong>🤸 Movilidad y activación</strong><br>5 minutos para preparar el cuerpo antes del entrenamiento.`}
+                        </div>
+
+                        <div class="motivacion">
+                            ${cardioAlInicio
+                                ? "Empieza suave. La idea es preparar tu cuerpo, no agotarte antes de la rutina."
+                                : "Como elegiste hacer el cardio al final, ahora hacemos solo una preparación breve de movilidad y activación. Después comenzamos tu entrenamiento."}
+                        </div>
+
+                        <div class="timer" id="timer">
+                            ${cardioAlInicio ? "25:00" : "05:00"}
+                        </div>
+
+                        <div class="controles">
+                            <button class="btn-siguiente" onclick="comenzarPreparacion(${cardioAlInicio ? 1500 : 300})">
+                                ${cardioAlInicio ? "▶️ Comenzar cardio" : "▶️ Comenzar preparación"}
+                            </button>
+                            <button class="btn-secundario" onclick="saltarPreparacion(${cardioAlInicio ? 1500 : 300})">
+                                ⏭️ Terminar temporizador
+                            </button>
+                            <button class="btn-secundario" onclick="mostrarPreferenciaCardio()">
+                                ← Cambiar preferencia
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+
+    function mostrarCalentamientoBreve() {
+        window.momentoCardioNura = "ninguno";
+
+        document.getElementById("app").innerHTML = `
+            <div class="pantalla">
+                <div class="contenedor">
+                    <div class="card entrenamiento-pantalla">
+                        <div class="logo">NURA</div>
+                        <div class="ejercicio-numero">🔥 Preparación</div>
+                        <h2 class="ejercicio-grande">5 minutos</h2>
+                        <div class="preparacion-resumen">
+                            Movilidad y activación suave para preparar tu cuerpo.
+                        </div>
+                        <div class="motivacion">
+                            No buscamos cansarte. Solo preparar el cuerpo para moverte con comodidad.
+                        </div>
+                        <div class="timer" id="timer">05:00</div>
+                        <div class="controles">
+                            <button class="btn-siguiente" onclick="comenzarPreparacion(300)">
+                                ▶️ Comenzar preparación
+                            </button>
+                            <button class="btn-secundario" onclick="terminarPreparacion()">
+                                ⏭️ Terminar temporizador
+                            </button>
+                            <button class="btn-secundario" onclick="mostrarPreferenciaCardio()">
+                                ← Cambiar preferencia
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+
+    function saltarPreparacion(segundosTotales) {
+
+        if (intervaloTimer) {
+            clearInterval(intervaloTimer);
+            intervaloTimer = null;
+        }
+
+        if (window.momentoCardioNura === "inicio") {
+            mostrarEntrenamiento();
+            return;
+        }
+
+        mostrarEntrenamiento();
+    }
+
+
+    function comenzarPreparacion(segundosTotales) {
+
+        if (intervaloTimer) {
+            clearInterval(intervaloTimer);
+        }
+
+        let segundos = segundosTotales;
+        const timer = document.getElementById("timer");
+
+        if (!timer) {
+            return;
+        }
+
+        timer.textContent = formatearTiempo(segundos);
+
+        intervaloTimer = setInterval(() => {
+            segundos--;
+            timer.textContent = formatearTiempo(segundos);
+
+            if (segundos <= 0) {
+                clearInterval(intervaloTimer);
+                intervaloTimer = null;
+                alert("¡Preparación terminada! Vamos con tu entrenamiento. 💪");
+                mostrarEntrenamiento();
+            }
+        }, 1000);
+    }
+
+
+    function terminarPreparacion() {
+
+        if (intervaloTimer) {
+            clearInterval(intervaloTimer);
+            intervaloTimer = null;
+        }
+
+        mostrarEntrenamiento();
+    }
+
+
+    function mostrarEntrenamiento() {
+
+        const rutina = obtenerRutinaSesion(sesionActual);
+
+        if (ejercicioActual >= rutina.ejercicios.length) {
+            finalizarEntrenamiento();
+            return;
+        }
+
+        const ejercicio = rutina.ejercicios[ejercicioActual];
+        const datosEjercicio = obtenerDatosEjercicio(ejercicio);
+
+        if (serieActual > datosEjercicio.series) {
+            serieActual = 1;
+            ejercicioActual++;
+
+            if (ejercicioActual >= rutina.ejercicios.length) {
+                finalizarEntrenamiento();
+                return;
+            }
+
+            mostrarEntrenamiento();
+            return;
+        }
+
+        document.getElementById("app").innerHTML = `
+            <div class="pantalla">
+                <div class="contenedor">
+                    <div class="card entrenamiento-pantalla">
+                        <div class="logo">NURA</div>
+
+                        <div class="ejercicio-numero">
+                            Sesión ${sesionActual} · ${rutina.nombre}<br>
+                            Ejercicio ${ejercicioActual + 1} de ${rutina.ejercicios.length}
+                        </div>
+
+                        <h2 class="ejercicio-grande">${datosEjercicio.nombre}</h2>
+
+                        <div class="serie-indicador">
+                            Serie ${serieActual} de ${datosEjercicio.series}
+                        </div>
+
+                        <div class="objetivo-serie">
+                            Objetivo: <strong>${datosEjercicio.objetivo}</strong>
+                        </div>
+
+                        <div class="motivacion">
+                            ${frasesMotivacion[ejercicioActual % frasesMotivacion.length]}
+                            <br><br>
+                            Haz las repeticiones con buena técnica y a un ritmo que puedas controlar.
+                        </div>
+
+                        <div class="controles">
+                            <button class="btn-siguiente" onclick="terminarSerie()">
+                                ✅ Terminé esta serie
+                            </button>
+
+                            <button class="btn-secundario" onclick="siguienteEjercicio()">
+                                ⏭️ Pasar al siguiente ejercicio
+                            </button>
+
+                            <button class="btn-secundario" onclick="mostrarPlanDespuesDeEntrenamiento()">
+                                ← Regresar al plan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+
+    function terminarSerie() {
+
+        if (intervaloTimer) {
+            clearInterval(intervaloTimer);
+            intervaloTimer = null;
+        }
+
+        const rutina = obtenerRutinaSesion(sesionActual);
+        const ejercicio = rutina.ejercicios[ejercicioActual];
+        const datosEjercicio = obtenerDatosEjercicio(ejercicio);
+
+        seriesCompletadasSesion++;
+
+        if (serieActual >= datosEjercicio.series) {
+            serieActual = 1;
+            ejercicioActual++;
+            mostrarEntrenamiento();
+            return;
+        }
+
+        mostrarDescansoEntreSeries(datosEjercicio);
+    }
+
+
+    function mostrarDescansoEntreSeries(datosEjercicio) {
+
+        const descanso = 60;
+
+        document.getElementById("app").innerHTML = `
+            <div class="pantalla">
+                <div class="contenedor">
+                    <div class="card entrenamiento-pantalla">
+                        <div class="logo">NURA</div>
+
+                        <div class="ejercicio-numero">🌿 Descanso entre series</div>
+
+                        <h2 class="ejercicio-grande">Recupera y respira</h2>
+
+                        <div class="descanso-panel">
+                            <h3>Serie ${serieActual} de ${datosEjercicio.series} completada</h3>
+                            <p>Descansa antes de continuar. No necesitas apresurarte.</p>
+                            <div class="timer" id="timer">01:00</div>
+                        </div>
+
+                        <div class="controles">
+                            <button class="btn-siguiente" onclick="comenzarDescanso(${descanso})">
+                                ▶️ Comenzar descanso
+                            </button>
+                            <button class="btn-secundario" onclick="saltarDescanso()">
+                                ⏭️ Continuar sin esperar
+                            </button>
+                            <button class="btn-secundario" onclick="mostrarPlanDespuesDeEntrenamiento()">
+                                ← Regresar al plan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+
+    function comenzarDescanso(segundosTotales) {
+
+        if (intervaloTimer) {
+            clearInterval(intervaloTimer);
+        }
+
+        let segundos = segundosTotales;
+        const timer = document.getElementById("timer");
+
+        if (!timer) {
+            return;
+        }
+
+        timer.textContent = formatearTiempo(segundos);
+
+        intervaloTimer = setInterval(() => {
+            segundos--;
+            timer.textContent = formatearTiempo(segundos);
+
+            if (segundos <= 0) {
+                clearInterval(intervaloTimer);
+                intervaloTimer = null;
+                serieActual++;
+                mostrarEntrenamiento();
+            }
+        }, 1000);
+    }
+
+
+    function saltarDescanso() {
+
+        if (intervaloTimer) {
+            clearInterval(intervaloTimer);
+            intervaloTimer = null;
+        }
+
+        serieActual++;
+        mostrarEntrenamiento();
+    }
+
+
+    function comenzarTemporizador() {
+        // Conservamos esta función para compatibilidad con versiones anteriores.
+        terminarSerie();
+    }
+
+
+    function formatearTiempo(segundos) {
+
+        const minutos = Math.floor(segundos / 60);
+        const segundosRestantes = segundos % 60;
+
+        return `${String(minutos).padStart(2, "0")}:${String(segundosRestantes).padStart(2, "0")}`;
+    }
+
+
+    function siguienteEjercicio() {
+
+        if (intervaloTimer) {
+            clearInterval(intervaloTimer);
+            intervaloTimer = null;
+        }
+
+        ejercicioActual++;
+        serieActual = 1;
+        mostrarEntrenamiento();
+    }
+
+
+    function finalizarEntrenamiento() {
+
+        const cardioAlFinal = window.momentoCardioNura === "final";
+
+        if (cardioAlFinal) {
+            mostrarCardioFinal();
+            return;
+        }
+
+        mostrarEnfriamiento();
+    }
+
+
+    function mostrarCardioFinal() {
+
+        const maquina = indiceDiaActual !== null
+            ? datosNura.preparacionMaquina[indiceDiaActual]
+            : null;
+        const encontrada = maquinasPreparacion.find(item => item[0] === maquina);
+        const nombreMaquina = encontrada ? encontrada[1] : "la máquina que prefieras";
+
+        document.getElementById("app").innerHTML = `
+            <div class="pantalla">
+                <div class="contenedor">
+                    <div class="card entrenamiento-pantalla">
+                        <div class="logo">NURA</div>
+                        <div class="ejercicio-numero">🏋️ Trabajo principal terminado</div>
+                        <h2 class="ejercicio-grande">❤️ Cardio final</h2>
+                        <div class="preparacion-resumen">
+                            <strong>🚴 ${nombreMaquina}</strong><br>
+                            25 minutos a un ritmo cómodo y progresivo.
+                        </div>
+                        <div class="motivacion">
+                            ¡Muy bien! Ahora puedes hacer tu cardio sin prisas. Mantén un ritmo que puedas sostener cómodamente.
+                        </div>
+                        <div class="timer" id="timer">25:00</div>
+                        <div class="controles">
+                            <button class="btn-siguiente" onclick="comenzarCardioFinal()">▶️ Comenzar cardio</button>
+                            <button class="btn-secundario" onclick="mostrarEnfriamiento()">⏭️ Omitir cardio</button>
+                        </div>
+                        <div class="calma-box" style="text-align:left;margin-top:20px;">
+                            <strong>🌿 Después</strong><br>
+                            Vuelta a la calma antes de cerrar tu sesión.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+
+    function comenzarCardioFinal() {
+
+        if (intervaloTimer) {
+            clearInterval(intervaloTimer);
+        }
+
+        let segundos = 1500;
+        const timer = document.getElementById("timer");
+
+        if (!timer) return;
+
+        timer.textContent = formatearTiempo(segundos);
+
+        intervaloTimer = setInterval(() => {
+            segundos--;
+            timer.textContent = formatearTiempo(segundos);
+
+            if (segundos <= 0) {
+                clearInterval(intervaloTimer);
+                intervaloTimer = null;
+                mostrarEnfriamiento();
+            }
+        }, 1000);
+    }
+
+
+    function mostrarEnfriamiento() {
+
+        if (intervaloTimer) {
+            clearInterval(intervaloTimer);
+            intervaloTimer = null;
+        }
+
+        document.getElementById("app").innerHTML = `
+            <div class="pantalla">
+                <div class="contenedor">
+                    <div class="card entrenamiento-pantalla">
+                        <div class="logo">NURA</div>
+                        <div class="ejercicio-numero">🌿 Último paso</div>
+                        <h2 class="ejercicio-grande">Vuelta a la calma</h2>
+                        <div class="preparacion-resumen">
+                            <strong>Respira y baja el ritmo poco a poco.</strong><br>
+                            Tómate unos minutos antes de dar por terminada tu sesión.
+                        </div>
+                        <div class="enfriamiento-lista">
+                            • Caminata suave o movimiento ligero.<br>
+                            • Respiración tranquila y controlada.<br>
+                            • Movilidad suave, sin rebotes ni dolor.
+                        </div>
+                        <div class="timer" id="timer">05:00</div>
+                        <div class="motivacion">
+                            No necesitas apresurarte. Terminar con calma también forma parte del entrenamiento. 💚
+                        </div>
+                        <div class="controles">
+                            <button class="btn-siguiente" onclick="comenzarEnfriamiento()">
+                                ▶️ Comenzar vuelta a la calma
+                            </button>
+                            <button class="btn-secundario" onclick="finalizarSesionNura()">
+                                ⏭️ Terminar sin esperar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+
+    function comenzarEnfriamiento() {
+
+        if (intervaloTimer) clearInterval(intervaloTimer);
+
+        let segundos = 300;
+        const timer = document.getElementById("timer");
+        if (!timer) return;
+
+        timer.textContent = formatearTiempo(segundos);
+
+        intervaloTimer = setInterval(() => {
+            segundos--;
+            timer.textContent = formatearTiempo(segundos);
+
+            if (segundos <= 0) {
+                clearInterval(intervaloTimer);
+                intervaloTimer = null;
+                finalizarSesionNura();
+            }
+        }, 1000);
+    }
+
+
+    function guardarSesionEnHistorial(minutosSesion, rutina) {
+
+        const momento = window.momentoCardioNura || "ninguno";
+        const maquina = indiceDiaActual !== null
+            ? datosNura.preparacionMaquina[indiceDiaActual]
+            : null;
+
+        const encontrada = maquinasPreparacion.find(item => item[0] === maquina);
+
+        const registro = {
+            fecha: new Date().toLocaleString("es-MX", {
+                dateStyle: "medium",
+                timeStyle: "short"
+            }),
+            timestamp: new Date().toISOString(),
+            sesion: sesionActual,
+            rutina: rutina.nombre,
+            minutos: minutosSesion,
+            ejercicios: rutina.ejercicios.length,
+            series: seriesCompletadasSesion,
+            cardio: momento === "inicio" ? "Al inicio" : momento === "final" ? "Al final" : "Sin cardio",
+            maquina: encontrada ? encontrada[1] : "Sin máquina"
+        };
+
+        historialNura.unshift(registro);
+        historialNura = historialNura.slice(0, 10);
+
+        try {
+            localStorage.setItem("nuraHistorial", JSON.stringify(historialNura));
+        } catch (e) {
+            // Si el navegador bloquea almacenamiento local, la sesión continúa normalmente.
+        }
+    }
+
+
+    function obtenerFechaRegistro(item) {
+
+        if (item.timestamp) {
+            const fecha = new Date(item.timestamp);
+            if (!isNaN(fecha.getTime())) return fecha;
+        }
+
+        const fechaAnterior = new Date(item.fecha);
+        return isNaN(fechaAnterior.getTime()) ? null : fechaAnterior;
+    }
+
+
+    function obtenerInicioSemana() {
+
+        const hoy = new Date();
+        const inicio = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+        const dia = inicio.getDay();
+        const diferencia = dia === 0 ? 6 : dia - 1;
+        inicio.setDate(inicio.getDate() - diferencia);
+        inicio.setHours(0, 0, 0, 0);
+        return inicio;
+    }
+
+
+    function obtenerSesionesSemana() {
+
+        const inicioSemana = obtenerInicioSemana();
+
+        return historialNura.filter(item => {
+            const fecha = obtenerFechaRegistro(item);
+            if (!fecha) return false;
+
+            // Comparamos solo la fecha calendario local para evitar que la
+            // conversión UTC del timestamp mueva una sesión al día anterior.
+            const fechaLocal = new Date(
+                fecha.getFullYear(),
+                fecha.getMonth(),
+                fecha.getDate()
+            );
+
+            return fechaLocal >= inicioSemana;
+        });
+    }
+
+
+    function obtenerMensajeProgreso(totalSemana, objetivoSemana) {
+
+        if (totalSemana === 0) {
+            return "Esta semana todavía no has registrado una sesión. No pasa nada: NURA estará aquí cuando estés listo para empezar.";
+        }
+
+        if (objetivoSemana > 0 && totalSemana >= objetivoSemana) {
+            return `¡Excelente! Ya completaste las ${objetivoSemana} sesiones que habías elegido para esta semana. Ahora toca recuperarte y mantener un ritmo sostenible.`;
+        }
+
+        if (objetivoSemana > 0) {
+            const faltan = objetivoSemana - totalSemana;
+            return `¡Buen comienzo! Llevas ${totalSemana} de ${objetivoSemana} sesiones esta semana. Te faltan ${faltan} para completar los días que elegiste.`;
+        }
+
+        return `¡Buen comienzo! Ya llevas ${totalSemana} sesión${totalSemana === 1 ? "" : "es"} registrada${totalSemana === 1 ? "" : "s"}.`;
+    }
+
+
+    function mostrarProgresoNura() {
+
+        const sesionesSemana = obtenerSesionesSemana();
+        const totalSemana = sesionesSemana.length;
+        const totalSesiones = historialNura.length;
+        const objetivoSemana = datosNura.dias.length;
+
+        const ultimo = historialNura[0] || null;
+        const ultimaRutina = ultimo ? `${ultimo.rutina}` : "Aún no hay sesiones";
+        const ultimoCardio = ultimo
+            ? `${ultimo.cardio}${ultimo.maquina && ultimo.maquina !== "Sin máquina" ? ` · ${ultimo.maquina}` : ""}`
+            : "—";
+
+        document.getElementById("app").innerHTML = `
+            <div class="pantalla">
+                <div class="contenedor">
+                    <div class="card">
+                        <div class="logo">NURA</div>
+                        <div class="ejercicio-numero">📈 Tu progreso</div>
+                        <h2 class="ejercicio-grande">Así vas avanzando</h2>
+                        <p style="color:#607d7a;line-height:1.6;">
+                            NURA usa tus sesiones completadas para mostrarte tu constancia, sin convertirla en una competencia.
+                        </p>
+
+                        <div class="progreso-grid">
+                            <div class="progreso-card">
+                                <strong>${totalSemana}</strong>
+                                <span>sesiones esta semana</span>
+                            </div>
+                            <div class="progreso-card">
+                                <strong>${objetivoSemana || "—"}</strong>
+                                <span>días elegidos</span>
+                            </div>
+                            <div class="progreso-card">
+                                <strong>${totalSesiones}</strong>
+                                <span>sesiones registradas</span>
+                            </div>
+                        </div>
+
+                        <div class="progreso-mensaje">
+                            ${obtenerMensajeProgreso(totalSemana, objetivoSemana)}
+                        </div>
+
+                        <div class="historial-item">
+                            <strong>🏋️ Última sesión</strong>
+                            <div class="historial-meta">
+                                ${ultimaRutina}<br>
+                                ❤️ ${ultimoCardio}
+                            </div>
+                        </div>
+
+                        <div class="historial-box">
+                            <strong>📊 Historial reciente</strong>
+                            ${historialNura.length
+                                ? historialNura.slice(0, 5).map(item => `
+                                    <div class="historial-item">
+                                        <strong>Sesión ${item.sesion} · ${item.rutina}</strong>
+                                        <div class="historial-meta">
+                                            ${item.fecha}<br>
+                                            ${item.ejercicios} ejercicios · ${item.series} series · ${item.minutos} min
+                                        </div>
+                                    </div>
+                                `).join("")
+                                : `<div class="historial-item"><div class="historial-meta">Todavía no hay sesiones registradas.</div></div>`}
+                        </div>
+
+                        <button class="btn-siguiente" onclick="mostrarHistorialNura()">
+                            📊 Ver historial completo
+                        </button>
+                        <button class="btn-secundario" style="width:100%;margin-top:10px;" onclick="generarPlan()">
+                            📅 Volver a mi semana
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+
+    function mostrarHistorialNura() {
+
+        const registros = historialNura.length
+            ? historialNura.map(item => `
+                <div class="historial-item">
+                    <strong>Sesión ${item.sesion} · ${item.rutina}</strong>
+                    <div class="historial-meta">
+                        ${item.fecha}<br>
+                        ${item.ejercicios} ejercicios · ${item.series} series completadas · ${item.minutos} min<br>
+                        ❤️ Cardio: ${item.cardio}${item.maquina !== "Sin máquina" ? ` · ${item.maquina}` : ""}
+                    </div>
+                </div>
+            `).join("")
+            : `<div class="historial-item">
+                    <strong>Aún no hay sesiones registradas.</strong>
+                    <div class="historial-meta">Cuando completes tu primera sesión, aparecerá aquí.</div>
+               </div>`;
+
+        document.getElementById("app").innerHTML = `
+            <div class="pantalla">
+                <div class="contenedor">
+                    <div class="card">
+                        <div class="logo">NURA</div>
+                        <div class="ejercicio-numero">📊 Tu progreso</div>
+                        <h2 class="ejercicio-grande">Historial de sesiones</h2>
+                        <p style="color:#607d7a;line-height:1.6;">
+                            Aquí NURA irá registrando tus sesiones completadas para que puedas ver tu constancia.
+                        </p>
+                        <div class="historial-box">
+                            ${registros}
+                        </div>
+                        <button class="btn-siguiente" onclick="mostrarProgresoNura()">
+                            📈 Ver mi progreso
+                        </button>
+                        <button class="btn-secundario" style="width:100%;margin-top:10px;" onclick="generarPlan()">
+                            📅 Volver a mi semana
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function finalizarSesionNura() {
+
+        if (intervaloTimer) {
+            clearInterval(intervaloTimer);
+            intervaloTimer = null;
+        }
+
+        const segundosSesion = inicioSesionNura
+            ? Math.max(0, Math.round((Date.now() - inicioSesionNura) / 1000))
+            : 0;
+
+        const minutosSesion = Math.max(1, Math.round(segundosSesion / 60));
+        const rutina = obtenerRutinaSesion(sesionActual);
+        const totalEjercicios = rutina.ejercicios.length;
+
+        guardarSesionEnHistorial(minutosSesion, rutina);
+
+        document.getElementById("app").innerHTML = `
+            <div class="pantalla">
+                <div class="contenedor">
+                    <div class="card entrenamiento-pantalla">
+                        <div class="logo">NURA</div>
+                        <div class="ejercicio-numero">✨ Sesión completada</div>
+                        <h2 class="ejercicio-grande">¡Excelente trabajo!</h2>
+                        <p style="margin:10px 0 20px;color:#607d7a;line-height:1.6;">
+                            Terminaste tu sesión de <strong>${rutina.nombre}</strong>.
+                            Hoy diste un paso más para construir un hábito sostenible.
+                        </p>
+
+                        <div class="resumen-sesion">
+                            <div><strong>${totalEjercicios}</strong><span>ejercicios</span></div>
+                            <div><strong>${minutosSesion} min</strong><span>sesión</span></div>
+                        </div>
+
+                        <div class="calma-box">
+                            ❤️ Escucha a tu cuerpo, hidrátate y date tiempo para recuperarte.
+                        </div>
+
+                        <button class="btn-siguiente" onclick="mostrarPlanDespuesDeEntrenamiento()">
+                            📅 Volver a mi semana
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+
+    function mostrarPlanDespuesDeEntrenamiento() {
+
+        if (intervaloTimer) {
+            clearInterval(intervaloTimer);
+            intervaloTimer = null;
+        }
+
+        generarPlan();
+    }
+
+
+    /* =====================================================
+       VOZ / FUTURO ASISTENTE
+    ===================================================== */
+
+    function hablarConNura() {
+
+        alert(
+            "🎙️ La conversación por voz con NURA será una de las próximas funciones. Aquí podremos conectar la voz y el asistente inteligente más adelante."
+        );
+    }
+
+
+    /* =====================================================
+       INICIAR
+    ===================================================== */
+
+    mostrarPortada();
+
+</script>
+
+</body>
+</html>
